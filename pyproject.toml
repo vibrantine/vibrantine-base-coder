@@ -1,0 +1,45 @@
+[project]
+name = "vibrantine-base-coder"
+version = "0.1.0"
+description = "The smallest trustworthy atomic coding Commission built on Vibrantine."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Joshua Weir" }]
+requires-python = ">=3.12"
+dependencies = [
+    "pydantic>=2",
+    "vibrantine==0.6.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "ruff==0.15.13",
+    "basedpyright",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/vibrantine_base_coder"]
+
+[tool.uv.sources]
+vibrantine = { path = "../vibrantine", editable = true }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+
+[tool.basedpyright]
+include = ["src", "tests"]
+pythonVersion = "3.12"
+typeCheckingMode = "strict"
