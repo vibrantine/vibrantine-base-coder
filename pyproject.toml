@@ -25,6 +25,9 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/vibrantine_base_coder"]
+artifacts = [
+    "src/vibrantine_base_coder/prompts/*.md",
+]
 
 [tool.uv.sources]
 vibrantine = { path = "../vibrantine", editable = true }

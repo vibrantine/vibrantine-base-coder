@@ -15,6 +15,7 @@ from vibrantine_base_coder import (
 
 def test_public_surface_is_locked_exactly() -> None:
     assert set(vibrantine_base_coder.__all__) == {
+        "BaseCoder",
         "CodingOutcome",
         "CodingTask",
         "GoalDisposition",

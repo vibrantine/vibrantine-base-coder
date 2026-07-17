@@ -1,5 +1,6 @@
 """Public contract for the atomic Base Coder Commission."""
 
+from vibrantine_base_coder.commission import BaseCoder
 from vibrantine_base_coder.models import (
     CodingOutcome,
     CodingTask,
@@ -9,6 +10,7 @@ from vibrantine_base_coder.models import (
 )
 
 __all__ = [
+    "BaseCoder",
     "CodingOutcome",
     "CodingTask",
     "GoalDisposition",
