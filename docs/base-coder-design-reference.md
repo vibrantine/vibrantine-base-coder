@@ -13,7 +13,8 @@ is preserved in
 [`coding-orchestrator-design-reference.md`](coding-orchestrator-design-reference.md).
 
 The Python package, typed task and outcome contract, default-loop `BaseCoder`,
-packaged prompt, and standard toolbox wiring now exist. Contract changes must
+packaged prompt, standard toolbox wiring, thin CLI, and evaluation matrix runner
+now exist. Contract changes must
 preserve the boundary and non-goals below and update their lock tests.
 Vibrantine's current authoring contract is preserved in
 [`reference/vibrantine-authoring.md`](reference/vibrantine-authoring.md).
@@ -293,11 +294,18 @@ The package remains intentionally compact:
 ```text
 src/vibrantine_base_coder/
   __init__.py
+  cli.py
   commission.py
+  eval_cli.py
+  evaluation.py
   models.py
   py.typed
   prompts/system.md
 tests/
+evals/
+  fixtures/
+  prompts/
+  suites/
 ```
 
 The Commission imports the standard Vibrantine tools directly; there is no
@@ -340,8 +348,10 @@ orchestrator.
    standard tools.
 5. **Completed:** exercise the complete read, edit, shell-check, and conclude
    loop with scripted model responses.
-6. Add the thin runner and pinned-model fixture evaluations.
-7. Revise the prompt or contract only from observed failures against the BRIEF.
+6. **Completed:** add the thin runner and an isolated model × prompt × repetition
+   evaluator with a localized-defect fixture and independent oracle.
+7. Run the fixture against pinned model profiles and revise the prompt or
+   contract only from observed failures against the BRIEF.
 
 The first milestone is not orchestration. It is one bounded task completed by
 one Commission with a trustworthy receipt.

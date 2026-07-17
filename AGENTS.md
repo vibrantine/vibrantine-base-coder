@@ -109,14 +109,18 @@ transcript is diagnostic evidence, not proof of repository correctness.
 ## Current Repository State
 
 This repository now contains the runnable default-loop `BaseCoder`, its packaged
-prompt, the exact standard seven-tool toolbox, and the tested typed task and
-outcome contract. The neighboring `../vibrantine` checkout is the current local
-framework dependency; its public API and tests are authoritative over copied
-documentation when they differ.
+prompt, the exact standard seven-tool toolbox, the tested typed task and outcome
+contract, a thin one-shot CLI, and an isolated evaluation-matrix runner. Live
+evaluations belong under `evals/`, remain separate from deterministic `pytest`
+tests, and must use external credentials plus evaluator-owned oracle checks.
+The neighboring `../vibrantine` checkout is the current local framework
+dependency; its public API and tests are authoritative over copied documentation
+when they differ.
 
 The Git repository was initialized as new history on `main`. Continue with the
 next incomplete step in the active design reference and preserve the strict
-contract tests as the public boundary grows.
+contract tests as the public boundary grows. Never commit `.env.local` or place
+credential values in suite configuration, output records, logs, or fixtures.
 
 ## Handoff
 

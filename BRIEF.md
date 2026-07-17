@@ -55,5 +55,6 @@ Coder.
 
 ## Next Step
 
-Add a thin one-task runner and begin the pinned-model fixture suite with the
-localized defect case.
+Configure two pinned model profiles and run the localized-defect matrix. Review
+repository correctness, prompt sensitivity, repeated-run variance, provider
+call counts, and trace evidence before changing the Base Coder prompt.

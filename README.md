@@ -23,11 +23,13 @@ those responsibilities inside the coder itself.
 
 The project now has a runnable atomic `BaseCoder` using Vibrantine's default
 LLM loop, a packaged runtime prompt, the standard seven-tool toolbox, and a
-tested public task and outcome contract.
+tested public task and outcome contract. A thin one-shot CLI and isolated
+evaluation-matrix runner now exercise that same Commission without adding
+coding logic or orchestration to it.
 
 Local development uses the neighboring Vibrantine 0.6.0 checkout through an
-editable `uv` source. The repository has been initialized on `main` with no
-prior history.
+editable `uv` source. The repository's `main` branch tracks the published
+GitHub repository.
 
 ## Implemented Foundation
 
@@ -36,13 +38,47 @@ The implementation currently contains:
 - one `BaseCoder` Commission using Vibrantine's default LLM loop;
 - a small typed task and outcome contract;
 - Vibrantine's standard list, glob, grep, read, edit, write, and shell tools;
-- deterministic contract tests using scripted model responses.
+- deterministic contract tests using scripted model responses;
+- a one-task JSON CLI for OpenAI-compatible model profiles;
+- model × prompt × repetition evaluations over fresh fixture workspaces;
+- evaluator-owned oracle checks and credential-redacted run artifacts.
 
-The remaining first-release work is a thin runner and pinned-model evaluations
-against small repository fixtures.
+The remaining first-release work is to replace the example model identifiers,
+run the localized-defect suite against pinned models, and expand the fixture
+corpus only from observed gaps.
 
 It will not contain subagents, planners, reviewers, fan-out, durable sessions,
 repository maps, worktree coordination, or a custom coding orchestrator.
+
+## One-Shot CLI
+
+Create a `CodingTask` JSON file, then bind it to one workspace and model:
+
+```bash
+uv run base-coder C:/absolute/path/to/repository \
+  --task task.json \
+  --model provider/model-id \
+  --base-url-env BASE_CODER_EVAL_BASE_URL \
+  --api-key-env BASE_CODER_EVAL_API_KEY \
+  --env-file evals/.env.local
+```
+
+The command prints the typed `CommissionResult` as JSON. It exits `0` for
+`completed` or `no_change_needed`, `2` for an honest unfinished goal
+disposition, and `1` for runner or framework failure.
+
+## Evaluation Matrix
+
+The tracked example runs two model slots, two prompt variants, and three
+repetitions against the same localized-defect task. Inspect its 12 cells
+without credentials or provider calls:
+
+```bash
+uv run base-coder-eval evals/suites/localized-defect.toml --dry-run
+```
+
+See [`evals/README.md`](evals/README.md) for environment setup, live execution,
+result artifacts, and suite authoring.
 
 ## Development
 
