@@ -9,8 +9,13 @@ authors = [{ name = "Joshua Weir" }]
 requires-python = ">=3.12"
 dependencies = [
     "pydantic>=2",
+    "python-dotenv>=1",
     "vibrantine==0.6.0",
 ]
+
+[project.scripts]
+base-coder = "vibrantine_base_coder.cli:main"
+base-coder-eval = "vibrantine_base_coder.eval_cli:main"
 
 [dependency-groups]
 dev = [
