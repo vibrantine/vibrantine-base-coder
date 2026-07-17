@@ -55,5 +55,5 @@ Coder.
 
 ## Next Step
 
-Construct the smallest default-loop Commission over Vibrantine's standard tools
-and exercise its complete scripted read, edit, verify, and conclude path.
+Add a thin one-task runner and begin the pinned-model fixture suite with the
+localized defect case.

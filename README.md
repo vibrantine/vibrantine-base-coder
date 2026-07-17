@@ -21,24 +21,25 @@ those responsibilities inside the coder itself.
 
 ## Status
 
-The project has a bootstrapped Python package and a tested first public
-contract: `CodingTask`, `CodingOutcome`, `VerificationRecord`, and their closed
-status vocabularies. No runnable Base Coder Commission exists yet.
+The project now has a runnable atomic `BaseCoder` using Vibrantine's default
+LLM loop, a packaged runtime prompt, the standard seven-tool toolbox, and a
+tested public task and outcome contract.
 
 Local development uses the neighboring Vibrantine 0.6.0 checkout through an
 editable `uv` source. The repository has been initialized on `main` with no
 prior history.
 
-## First Scope
+## Implemented Foundation
 
-The first implementation will contain:
+The implementation currently contains:
 
 - one `BaseCoder` Commission using Vibrantine's default LLM loop;
 - a small typed task and outcome contract;
 - Vibrantine's standard list, glob, grep, read, edit, write, and shell tools;
-- deterministic contract tests using scripted model responses;
-- pinned-model evaluations against small repository fixtures;
-- a thin runner for one task invocation.
+- deterministic contract tests using scripted model responses.
+
+The remaining first-release work is a thin runner and pinned-model evaluations
+against small repository fixtures.
 
 It will not contain subagents, planners, reviewers, fan-out, durable sessions,
 repository maps, worktree coordination, or a custom coding orchestrator.

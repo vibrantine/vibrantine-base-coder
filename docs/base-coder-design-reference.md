@@ -12,8 +12,8 @@ and other product-level orchestration. The previous design for those concerns
 is preserved in
 [`coding-orchestrator-design-reference.md`](coding-orchestrator-design-reference.md).
 
-The Python package and first typed task and outcome contract now exist. The
-BaseCoder Commission, prompt, and toolbox wiring do not. Contract changes must
+The Python package, typed task and outcome contract, default-loop `BaseCoder`,
+packaged prompt, and standard toolbox wiring now exist. Contract changes must
 preserve the boundary and non-goals below and update their lock tests.
 Vibrantine's current authoring contract is preserved in
 [`reference/vibrantine-authoring.md`](reference/vibrantine-authoring.md).
@@ -106,9 +106,10 @@ enforce containment. Model, iteration, time, spend, persistence, cancellation,
 and tool-exposure ceilings continue to use Vibrantine's existing run and
 Commission mechanisms.
 
-A caller that wants a read-only coder constructs one without mutation tools.
-Authority is represented by the actual toolbox and surrounding process sandbox,
-not by prose fields the model can reinterpret.
+A caller that wants a read-only coder narrows the model-visible menu through
+Vibrantine capabilities or the run-wide tool ceiling. Authority is represented
+by the effective toolbox and surrounding process sandbox, not by prose fields
+the model can reinterpret.
 
 ### Task Input
 
@@ -292,14 +293,15 @@ The package remains intentionally compact:
 ```text
 src/vibrantine_base_coder/
   __init__.py
+  commission.py
   models.py
   py.typed
+  prompts/system.md
 tests/
 ```
 
-`models.py`, the package exports, and their lock tests now exist. The next slice
-adds `commission.py` and `prompts/system.md`; it should import the standard
-Vibrantine tools rather than add a local `tools/` package.
+The Commission imports the standard Vibrantine tools directly; there is no
+local `tools/` package.
 
 There is no coordinator module, planner, reviewer, state store, repository-map
 service, or application framework. A thin example or CLI may bind a workspace,
@@ -332,11 +334,12 @@ orchestrator.
    Vibrantine checkout for local development.
 2. **Completed:** add the typed task, outcome, verification, and disposition
    models with contract tests.
-3. Wire the exact standard Vibrantine toolbox and test its exposure and opening
-   workspace context.
-4. Implement `BaseCoder` as a basic Commission over Vibrantine's standard
-   tools.
-5. Exercise the complete loop with scripted model responses.
+3. **Completed:** wire the exact standard Vibrantine toolbox and test its
+   exposure, capability narrowing, and opening workspace context.
+4. **Completed:** implement `BaseCoder` as a basic Commission over Vibrantine's
+   standard tools.
+5. **Completed:** exercise the complete read, edit, shell-check, and conclude
+   loop with scripted model responses.
 6. Add the thin runner and pinned-model fixture evaluations.
 7. Revise the prompt or contract only from observed failures against the BRIEF.
 
