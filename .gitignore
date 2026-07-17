@@ -30,6 +30,7 @@ htmlcov/
 .env
 .env.*
 !.env.example
+evals/results/
 
 # Editors and operating systems
 .vscode/

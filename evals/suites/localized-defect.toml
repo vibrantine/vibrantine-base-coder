@@ -1,0 +1,41 @@
+name = "localized-defect"
+workspace = "fixtures/localized-defect"
+repetitions = 3
+max_iterations = 10
+max_llm_calls = 30
+time_limit_seconds = 300
+
+[task]
+goal = "Repair the localized defect in calculator.add."
+acceptance_criteria = [
+    "calculator.add returns the arithmetic sum of its two integer arguments.",
+    "The focused regression tests pass.",
+]
+constraints = [
+    "Make only changes needed for this localized defect.",
+    "Do not weaken or remove the regression tests.",
+]
+
+[[models]]
+name = "candidate-a"
+id = "replace-with-model-a"
+base_url_env = "BASE_CODER_EVAL_BASE_URL"
+api_key_env = "BASE_CODER_EVAL_API_KEY"
+
+[[models]]
+name = "candidate-b"
+id = "replace-with-model-b"
+base_url_env = "BASE_CODER_EVAL_BASE_URL"
+api_key_env = "BASE_CODER_EVAL_API_KEY"
+
+[[prompts]]
+name = "baseline"
+
+[[prompts]]
+name = "verification-emphasis"
+append_file = "prompts/verification-emphasis.md"
+
+[[checks]]
+name = "localized regression tests"
+command = ["{python}", "-m", "unittest", "-q"]
+timeout_seconds = 30
